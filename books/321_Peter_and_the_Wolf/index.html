@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Peter and the Wolf | Grandma Sue's Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrapper">
+        <div class="logo">
+          <a href="../../index.html" aria-label="Back to library">
+            <div class="logo-mark" aria-hidden="true"></div>
+          </a>
+          Retro Read-Along Records
+        </div>
+
+        <section class="book-hero">
+          <div class="book-meta">
+            <h1 class="section-title">Peter and the Wolf</h1>
+            <p>
+              Peter and the Wolf began as a musical story created by the composer Sergei Prokofiev in 1936, written to introduce children to the sounds of the orchestra. It’s a tale where each character has its own musical voice, so the story feels like it’s being painted in sound. Even now, it’s a wonderful reminder that music can tell a story all by itself.
+            </p>
+            <div class="tags">
+              <span class="tag" title="Category: Read-Along Vinyl Record + Book">Read-Along Vinyl Record + Book</span>
+              <span class="tag" title="Collection: LLP Book &amp; Record">LLP Book &amp; Record</span>
+              <span class="tag" title="Publisher: Disneyland Records">Disneyland Records</span>
+            </div>
+            <ul>
+              <li><span>Year:</span> 1978</li>
+              <li><span>Narration:</span> Hal Smith</li>
+              <li><span>Composer:</span> Sergei Prokofiev</li>
+            </ul>
+          </div>
+          <div class="cover">
+            <img src="../../assets/images/peter-and-the-wolf-cover.png" alt="Peter and the Wolf cover" />
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="wrapper">
+      <section class="viewer" aria-label="Read along viewer">
+        <div class="spread">
+          <img id="page-left" alt="Story page left" />
+          <img id="page-right" alt="Story page right" />
+        </div>
+
+        <div class="audio-controls" aria-label="Read-along controls">
+          <input
+            type="range"
+            id="progress"
+            class="progress"
+            min="0"
+            max="100"
+            value="0"
+            aria-label="Audio progress"
+          />
+          <div class="controls-bar">
+            <button class="control-btn" id="prev" title="Turn back" aria-label="Turn back">&#9664;</button>
+            <button class="control-btn play" id="play" title="Listen" aria-label="Listen">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+            <button class="control-btn" id="next" title="Turn the page" aria-label="Turn the page">&#9654;</button>
+          </div>
+        </div>
+
+        <audio id="audio" src="audio_only.m4a" preload="metadata"></audio>
+      </section>
+
+      <section class="extras" aria-label="Other ways to enjoy this story">
+        <div class="extras-title">Other ways to enjoy this story</div>
+        <div class="action-row">
+          <a class="action" href="#" title="Watch on YouTube" aria-label="Watch on YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#d11e1e" d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.5.5a3 3 0 0 0-2.1 2.1C2 9 2 12 2 12s0 3 .4 4.8a3 3 0 0 0 2.1 2.1c1.7.5 7.5.5 7.5.5s5.8 0 7.5-.5a3 3 0 0 0 2.1-2.1C22 15 22 12 22 12s0-3-.4-4.8Z" />
+              <path fill="#fff" d="M10 9.5v5l4.5-2.5-4.5-2.5Z" />
+            </svg>
+          </a>
+          <a class="action" href="#" title="Podcast" aria-label="Podcast">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.2" fill="#d58b5a" />
+              <path fill="none" stroke="#d58b5a" stroke-width="2" d="M6 12a6 6 0 0 1 12 0" />
+              <path fill="none" stroke="#d58b5a" stroke-width="2" d="M4 12a8 8 0 0 1 16 0" />
+            </svg>
+          </a>
+          <a
+            class="action disabled"
+            href="#"
+            title="Amazon link (available for original stories)"
+            aria-label="Amazon link (available for original stories)"
+            aria-disabled="true"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#7c4e2b" d="M7 7h10l-1 10H8L7 7z" />
+              <path fill="#7c4e2b" d="M9 7a3 3 0 0 1 6 0h-2a1 1 0 0 0-2 0H9z" />
+            </svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Story pages appear as two-page spreads. Use the arrows to turn the page.
+    </footer>
+
+    <script>
+      const totalPages = 27;
+      const pages = Array.from({ length: totalPages }, (_, i) => `Scan ${i + 1}.png`);
+      let index = 0;
+
+      const left = document.getElementById("page-left");
+      const right = document.getElementById("page-right");
+
+      const audio = document.getElementById("audio");
+      const playButton = document.getElementById("play");
+      const progress = document.getElementById("progress");
+
+      function render() {
+        const leftPage = pages[index];
+        const rightPage = pages[index + 1];
+        left.src = encodeURI(leftPage);
+        left.alt = `Story page ${index + 1}`;
+
+        if (rightPage) {
+          right.src = encodeURI(rightPage);
+          right.alt = `Story page ${index + 2}`;
+          right.style.opacity = "1";
+        } else {
+          right.removeAttribute("src");
+          right.alt = "";
+          right.style.opacity = "0";
+        }
+      }
+
+      function setPlayIcon(isPlaying) {
+        playButton.innerHTML = isPlaying
+          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>'
+          : '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>';
+      }
+
+      playButton.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          setPlayIcon(true);
+        } else {
+          audio.pause();
+          setPlayIcon(false);
+        }
+      });
+
+
+      audio.addEventListener("timeupdate", () => {
+        if (!audio.duration) return;
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progress.value = percent;
+      });
+
+      audio.addEventListener("ended", () => {
+        setPlayIcon(false);
+      });
+
+      progress.addEventListener("input", () => {
+        if (!audio.duration) return;
+        const seekTime = (progress.value / 100) * audio.duration;
+        audio.currentTime = seekTime;
+      });
+
+      document.getElementById("prev").addEventListener("click", () => {
+        index = Math.max(0, index - 2);
+        render();
+      });
+
+      document.getElementById("next").addEventListener("click", () => {
+        index = Math.min(pages.length - 1, index + 2);
+        render();
+      });
+
+      render();
+    </script>
+  </body>
+</html>
