@@ -64,13 +64,17 @@
             aria-label="Audio progress"
           />
           <div class="controls-bar">
-            <button class="control-btn" id="prev" title="Turn back" aria-label="Turn back">&#9664;</button>
+            <button class="control-btn" id="prev" title="Turn back" aria-label="Turn back">
+              <img src="../../assets/icons/left.svg" alt="" aria-hidden="true" />
+            </button>
             <button class="control-btn play" id="play" title="Listen" aria-label="Listen">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="currentColor" d="M8 5v14l11-7z" />
               </svg>
             </button>
-            <button class="control-btn" id="next" title="Turn the page" aria-label="Turn the page">&#9654;</button>
+            <button class="control-btn" id="next" title="Turn the page" aria-label="Turn the page">
+              <img src="../../assets/icons/right.svg" alt="" aria-hidden="true" />
+            </button>
           </div>
         </div>
 
@@ -80,30 +84,20 @@
       <section class="extras" aria-label="Other ways to enjoy this story">
         <div class="extras-title">Other ways to enjoy this story</div>
         <div class="action-row">
-          <a class="action" href="#" title="Watch on YouTube" aria-label="Watch on YouTube">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="#d11e1e" d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.5.5a3 3 0 0 0-2.1 2.1C2 9 2 12 2 12s0 3 .4 4.8a3 3 0 0 0 2.1 2.1c1.7.5 7.5.5 7.5.5s5.8 0 7.5-.5a3 3 0 0 0 2.1-2.1C22 15 22 12 22 12s0-3-.4-4.8Z" />
-              <path fill="#fff" d="M10 9.5v5l4.5-2.5-4.5-2.5Z" />
-            </svg>
+          <a class="action hifi-action" href="#" title="Watch on YouTube" aria-label="Watch on YouTube">
+            <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
           </a>
-          <a class="action" href="#" title="Podcast" aria-label="Podcast">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="3.2" fill="#d58b5a" />
-              <path fill="none" stroke="#d58b5a" stroke-width="2" d="M6 12a6 6 0 0 1 12 0" />
-              <path fill="none" stroke="#d58b5a" stroke-width="2" d="M4 12a8 8 0 0 1 16 0" />
-            </svg>
+          <a class="action hifi-action" href="#" title="Podcast" aria-label="Podcast">
+            <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
           </a>
           <a
-            class="action disabled"
+            class="action hifi-action disabled"
             href="#"
             title="Amazon link (available for original stories)"
             aria-label="Amazon link (available for original stories)"
             aria-disabled="true"
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="#7c4e2b" d="M7 7h10l-1 10H8L7 7z" />
-              <path fill="#7c4e2b" d="M9 7a3 3 0 0 1 6 0h-2a1 1 0 0 0-2 0H9z" />
-            </svg>
+            <img src="../../assets/icons/purchase.svg" alt="" aria-hidden="true" />
           </a>
         </div>
       </section>
