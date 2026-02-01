@@ -15,12 +15,10 @@
   <body>
     <header class="site-header">
       <div class="wrapper">
-        <div class="logo">
-          <a href="../../index.html" aria-label="Back to library">
-            <div class="logo-mark" aria-hidden="true"></div>
-          </a>
-          Retro Read-Along Records
-        </div>
+        <a class="logo" href="../../index.html" aria-label="Go to home page">
+          <img class="logo-mark" src="../../sample_files/colorlogo2.png" alt="Retro Read Along logo" />
+          Retro Read Along
+        </a>
 
         <section class="book-hero">
           <div class="book-meta">
@@ -37,10 +35,11 @@
               <li><span>Year:</span> 1978</li>
               <li><span>Narration:</span> Hal Smith</li>
               <li><span>Composer:</span> Sergei Prokofiev</li>
+              <li><span>Grandma's Library Catalog No:</span> GSL-VR-001</li>
             </ul>
           </div>
           <div class="cover">
-            <img src="../../assets/images/peter-and-the-wolf-cover.png" alt="Peter and the Wolf cover" />
+            <img src="../../assets/images/peter-and-the-wolf-cover.jpg" alt="Peter and the Wolf cover" />
           </div>
         </section>
       </div>
@@ -59,7 +58,8 @@
             id="progress"
             class="progress"
             min="0"
-            max="100"
+            max="0"
+            step="0.01"
             value="0"
             aria-label="Audio progress"
           />
@@ -78,16 +78,16 @@
           </div>
         </div>
 
-        <audio id="audio" src="audio_only.m4a" preload="metadata"></audio>
+        <audio id="audio" src="321_audio.mp3" preload="auto"></audio>
       </section>
 
       <section class="extras" aria-label="Other ways to enjoy this story">
         <div class="extras-title">Other ways to enjoy this story</div>
         <div class="action-row">
-          <a class="action hifi-action" href="#" title="Watch on YouTube" aria-label="Watch on YouTube">
+          <a class="action hifi-action" href="https://youtu.be/SGyk72pe5x0" title="Watch on YouTube" aria-label="Watch on YouTube" target="_blank" rel="noreferrer">
             <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
           </a>
-          <a class="action hifi-action" href="#" title="Podcast" aria-label="Podcast">
+          <a class="action hifi-action" href="https://open.spotify.com/episode/3p4RmNbVxrBDP1JPaCpDB7?si=Erh-IYBsSxmtc4dmnQ-08g" title="Podcast" aria-label="Podcast" target="_blank" rel="noreferrer">
             <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
           </a>
           <a
@@ -107,9 +107,9 @@
       Story pages appear as two-page spreads. Use the arrows to turn the page.
     </footer>
 
-    <script>
+      <script>
       const totalPages = 27;
-      const pages = Array.from({ length: totalPages }, (_, i) => `Scan ${i + 1}.png`);
+      const pages = Array.from({ length: totalPages }, (_, i) => `Scan ${i + 1}.jpg`);
       let index = 0;
 
       const left = document.getElementById("page-left");
@@ -118,6 +118,7 @@
       const audio = document.getElementById("audio");
       const playButton = document.getElementById("play");
       const progress = document.getElementById("progress");
+      let isSeeking = false;
 
       function render() {
         const leftPage = pages[index];
@@ -153,20 +154,40 @@
       });
 
 
+      function syncProgressRange() {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        progress.max = Math.max(1, audio.duration).toString();
+      }
+
+      audio.addEventListener("loadedmetadata", syncProgressRange);
+      audio.addEventListener("loadeddata", syncProgressRange);
+      audio.addEventListener("canplay", syncProgressRange);
+      audio.addEventListener("durationchange", syncProgressRange);
+
       audio.addEventListener("timeupdate", () => {
-        if (!audio.duration) return;
-        const percent = (audio.currentTime / audio.duration) * 100;
-        progress.value = percent;
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        if (progress.max === "0") syncProgressRange();
+        if (isSeeking) return;
+        progress.value = audio.currentTime.toString();
       });
 
       audio.addEventListener("ended", () => {
         setPlayIcon(false);
       });
 
-      progress.addEventListener("input", () => {
-        if (!audio.duration) return;
-        const seekTime = (progress.value / 100) * audio.duration;
-        audio.currentTime = seekTime;
+      progress.addEventListener("pointerdown", () => {
+        isSeeking = true;
+      });
+
+      progress.addEventListener("pointerup", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        isSeeking = false;
+        audio.currentTime = Number(progress.value);
+      });
+
+      progress.addEventListener("change", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        audio.currentTime = Number(progress.value);
       });
 
       document.getElementById("prev").addEventListener("click", () => {
