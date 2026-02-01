@@ -65,10 +65,16 @@
 
 ## Book page layout
 - Top block: two columns with cover on the right and title/description on the left.
-- Show basic info/tags (author, illustrator, narrator, collection, year, origin/context).
+- Show basic info/tags using the metadata default below.
 - Viewer: two-page spread (two square pages side-by-side) with left/right controls.
+- Audio slider should include a live time readout in `current / total` format (example: `1:23 / 4:56`).
 - Action icons (large and very clear): audio, YouTube, podcast, Amazon (only for originals later).
 - Include hover tooltips on action icons and a short helper line.
+
+## Book metadata default
+- Use a small "core 6" on every book page for consistency.
+- Core 6: title, year, author, illustrator, narrator, GSL Library No.
+- Optional fields (only when useful): publisher, collection/series, archive/item number, origin/context note.
 
 ## Catalog system
 - Format: GSL-XX-### (e.g., GSL-VR-001).
@@ -85,6 +91,48 @@
 - Optional Amazon link.
 - Title + short warm description.
 - Basic info and tags.
+
+## Repeatable book-page process (default)
+- Use this process for each new weekly book page so layout/content stay cohesive.
+- Start from template: `books/_book_page_template.html`
+
+### 1) Gather assets + links
+- Confirm folder name under `books/` (example: `books/GSL_SR_002`).
+- Confirm cover + spread images are `.jpg` (convert from `.png` if needed).
+- Confirm audio filename and available links (YouTube, podcast, optional Amazon).
+
+### 2) Build top content block
+- Use one warm blurb paragraph that includes: hook + vintage context + bonus-song note (if applicable).
+- Do not split this into helper text unless explicitly requested.
+- Keep tags to 3 concise items (typically category, collection, year).
+
+### 3) Metadata list (core 6 default)
+- Always include: title, year, author, illustrator, narrator, GSL Library No.
+- Optional details (publisher, archive/item no., origin/context) should stay in blurb/context text unless needed in metadata list.
+
+### 4) Viewer defaults
+- Storybook pages should open on interior `spread 1` (not front/back cover in viewer) unless requested otherwise.
+- Keep the top-right cover image in the hero section.
+- Keep large left/right page-turn controls.
+
+### 5) Audio controls defaults
+- Keep progress slider with stable seeking behavior.
+- Show live time readout on the right in `current / total` format (example `1:23 / 4:56`).
+
+### 6) Extras/actions defaults
+- Show audio/YouTube/podcast/Amazon icon row.
+- If links are missing, keep icon disabled with clear tooltip text.
+- Do not add extra helper line like “Audio is ready…” unless requested.
+
+### 7) Homepage update
+- Replace the next “Coming Soon” card with the new book card.
+- Card should include: cover, tags, title, short one-liner, and link to the book page.
+
+### 8) Final QA before handoff
+- Verify all image paths match actual folder names (`jpg/` vs `png/`).
+- Verify audio loads, play/pause works, slider seeks, and time readout updates.
+- Verify viewer arrows navigate correctly across all spreads.
+- Verify metadata uses the core 6 format and page copy has no repeated facts.
 
 ## Weekly image optimization (one book at a time)
 - Goal sizes: pages 1200–1600 px square, ~200–500 KB each; covers ~300–700 KB.
