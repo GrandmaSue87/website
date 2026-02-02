@@ -4,6 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BOOK_TITLE | Grandma Sue's Library</title>
+    <meta
+      name="description"
+      content="SOCIAL_PREVIEW_DESCRIPTION"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RetroReadAlong" />
+    <meta property="og:title" content="BOOK_TITLE | Grandma Sue's Library" />
+    <meta
+      property="og:description"
+      content="SOCIAL_PREVIEW_DESCRIPTION"
+    />
+    <meta
+      property="og:url"
+      content="https://www.retroreadalong.com/books/BOOK_FOLDER/"
+    />
+    <meta
+      property="og:image"
+      content="https://www.retroreadalong.com/books/BOOK_FOLDER/jpg/front_cover.jpg"
+    />
+    <meta property="og:image:alt" content="BOOK_TITLE book cover" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="BOOK_TITLE | Grandma Sue's Library" />
+    <meta
+      property="twitter:description"
+      content="SOCIAL_PREVIEW_DESCRIPTION"
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.retroreadalong.com/books/BOOK_FOLDER/jpg/front_cover.jpg"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,6 +72,7 @@
               <li><span>Author:</span> AUTHOR</li>
               <li><span>Illustrator:</span> ILLUSTRATOR</li>
               <li><span>Narrator:</span> NARRATOR</li>
+              <li><span>Publisher:</span> PUBLISHER</li>
               <li><span>Grandma Sue Library No:</span> GSL-XX-###</li>
             </ul>
           </div>
@@ -54,7 +85,7 @@
 
     <main class="wrapper">
       <section class="viewer" aria-label="Read along viewer">
-        <div class="spread">
+        <div class="spread" id="spread-view">
           <img id="page-spread" alt="Story spread" />
         </div>
 
@@ -91,6 +122,11 @@
       <section class="extras" aria-label="Other ways to enjoy this story">
         <div class="extras-title">Other ways to enjoy this story</div>
         <div class="action-row">
+          <button class="action hifi-action" id="share" title="Read with a friend" aria-label="Read with a friend" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M21.5 3.5l-2 16c-.1.7-.8 1.1-1.5.8l-5.9-2.4-3.1 3.2c-.3.3-.8.4-1.2.2-.4-.2-.6-.6-.6-1v-4.1l9-8.8-11 7c-.5.3-1.2.1-1.5-.4L1.2 9.7c-.3-.5-.1-1.2.5-1.4l18.2-5.9c.8-.3 1.6.4 1.5 1.1z" />
+            </svg>
+          </button>
           <a class="action hifi-action disabled" href="#" title="YouTube link coming soon" aria-label="YouTube link coming soon" aria-disabled="true">
             <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
           </a>
@@ -109,19 +145,29 @@
     <script>
       const totalSpreads = TOTAL_SPREADS;
       const pages = Array.from({ length: totalSpreads }, (_, i) => `jpg/spread ${i + 1}.jpg`);
+      const backCoverPage = "jpg/back_cover.jpg";
+      pages.push(backCoverPage);
       let index = 0;
 
-      const spread = document.getElementById("page-spread");
+      const spreadView = document.getElementById("spread-view");
       const audio = document.getElementById("audio");
       const playButton = document.getElementById("play");
       const progress = document.getElementById("progress");
       const timeReadout = document.getElementById("time-readout");
+      const shareButton = document.getElementById("share");
       let isSeeking = false;
 
       function render() {
         const current = pages[index];
-        spread.src = encodeURI(current);
-        spread.alt = `Story spread ${index + 1}`;
+        if (current === backCoverPage) {
+          spreadView.innerHTML = `
+            <img src="${encodeURI(current)}" alt="Back cover" />
+            <div class="page-blank" aria-hidden="true"></div>
+          `;
+          return;
+        }
+
+        spreadView.innerHTML = `<img src="${encodeURI(current)}" alt="Story spread ${index + 1}" />`;
       }
 
       function setPlayIcon(isPlaying) {
@@ -176,6 +222,31 @@
         setPlayIcon(false);
       });
 
+      shareButton.addEventListener("click", async () => {
+        const shareData = {
+          title: document.title,
+          text: "Read with a friend",
+          url: window.location.href,
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            return;
+          }
+
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(window.location.href);
+            shareButton.title = "Link copied. Read with a friend";
+            setTimeout(() => {
+              shareButton.title = "Read with a friend";
+            }, 2000);
+          }
+        } catch (error) {
+          // User canceled share or browser blocked clipboard.
+        }
+      });
+
       progress.addEventListener("pointerdown", () => {
         isSeeking = true;
       });
@@ -194,12 +265,12 @@
       });
 
       document.getElementById("prev").addEventListener("click", () => {
-        index = Math.max(0, index - 1);
+        index = index === 0 ? pages.length - 1 : index - 1;
         render();
       });
 
       document.getElementById("next").addEventListener("click", () => {
-        index = Math.min(pages.length - 1, index + 1);
+        index = index === pages.length - 1 ? 0 : index + 1;
         render();
       });
 
