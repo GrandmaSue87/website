@@ -11,6 +11,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../styles.css" />
+    <style>
+      .time-readout {
+        font-size: 13px;
+        color: var(--muted);
+        text-align: right;
+        margin-top: -4px;
+      }
+    </style>
   </head>
   <body>
     <header class="site-header">
@@ -33,9 +41,10 @@
             </div>
             <ul>
               <li><span>Year:</span> 1978</li>
-              <li><span>Narration:</span> Hal Smith</li>
-              <li><span>Composer:</span> Sergei Prokofiev</li>
-              <li><span>Grandma's Library Catalog No:</span> GSL-VR-001</li>
+              <li><span>Author:</span> Sergei Prokofiev (original story and score)</li>
+              <li><span>Illustrator:</span> Not listed in this edition</li>
+              <li><span>Narrator:</span> Hal Smith</li>
+              <li><span>Grandma Sue Library No:</span> GSL-VR-001</li>
             </ul>
           </div>
           <div class="cover">
@@ -63,6 +72,7 @@
             value="0"
             aria-label="Audio progress"
           />
+          <div id="time-readout" class="time-readout" aria-live="polite">0:00 / 0:00</div>
           <div class="controls-bar">
             <button class="control-btn" id="prev" title="Turn back" aria-label="Turn back">
               <img src="../../assets/icons/left.svg" alt="" aria-hidden="true" />
@@ -118,6 +128,7 @@
       const audio = document.getElementById("audio");
       const playButton = document.getElementById("play");
       const progress = document.getElementById("progress");
+      const timeReadout = document.getElementById("time-readout");
       let isSeeking = false;
 
       function render() {
@@ -157,6 +168,20 @@
       function syncProgressRange() {
         if (!audio.duration || Number.isNaN(audio.duration)) return;
         progress.max = Math.max(1, audio.duration).toString();
+        updateTimeDisplay();
+      }
+
+      function formatTime(totalSeconds) {
+        if (!Number.isFinite(totalSeconds) || totalSeconds < 0) return "0:00";
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+        return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+      }
+
+      function updateTimeDisplay() {
+        const current = formatTime(audio.currentTime || 0);
+        const total = formatTime(audio.duration || 0);
+        timeReadout.textContent = `${current} / ${total}`;
       }
 
       audio.addEventListener("loadedmetadata", syncProgressRange);
@@ -169,6 +194,7 @@
         if (progress.max === "0") syncProgressRange();
         if (isSeeking) return;
         progress.value = audio.currentTime.toString();
+        updateTimeDisplay();
       });
 
       audio.addEventListener("ended", () => {
@@ -183,11 +209,13 @@
         if (!audio.duration || Number.isNaN(audio.duration)) return;
         isSeeking = false;
         audio.currentTime = Number(progress.value);
+        updateTimeDisplay();
       });
 
       progress.addEventListener("change", () => {
         if (!audio.duration || Number.isNaN(audio.duration)) return;
         audio.currentTime = Number(progress.value);
+        updateTimeDisplay();
       });
 
       document.getElementById("prev").addEventListener("click", () => {
@@ -201,6 +229,7 @@
       });
 
       render();
+      updateTimeDisplay();
     </script>
   </body>
 </html>

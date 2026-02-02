@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BOOK_TITLE | Grandma Sue's Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+    <style>
+      .time-readout {
+        font-size: 13px;
+        color: var(--muted);
+        text-align: right;
+        margin-top: -4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="logo" href="../../index.html" aria-label="Go to home page">
+          <img class="logo-mark" src="../../sample_files/colorlogo2.png" alt="Retro Read Along logo" />
+          Retro Read Along
+        </a>
+
+        <section class="book-hero">
+          <div class="book-meta">
+            <h1 class="section-title">BOOK_TITLE</h1>
+            <p>WARM_BLURB_HOOK_CONTEXT_AND_BONUS_NOTE</p>
+            <div class="tags">
+              <span class="tag" title="Category: CATEGORY">CATEGORY</span>
+              <span class="tag" title="Collection: COLLECTION">COLLECTION</span>
+              <span class="tag" title="Year: YEAR">YEAR</span>
+            </div>
+            <ul>
+              <li><span>Year:</span> YEAR</li>
+              <li><span>Author:</span> AUTHOR</li>
+              <li><span>Illustrator:</span> ILLUSTRATOR</li>
+              <li><span>Narrator:</span> NARRATOR</li>
+              <li><span>Grandma Sue Library No:</span> GSL-XX-###</li>
+            </ul>
+          </div>
+          <div class="cover">
+            <img src="jpg/front_cover.jpg" alt="BOOK_TITLE cover" />
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="wrapper">
+      <section class="viewer" aria-label="Read along viewer">
+        <div class="spread">
+          <img id="page-spread" alt="Story spread" />
+        </div>
+
+        <div class="audio-controls" aria-label="Read-along controls">
+          <input
+            type="range"
+            id="progress"
+            class="progress"
+            min="0"
+            max="0"
+            step="0.01"
+            value="0"
+            aria-label="Audio progress"
+          />
+          <div id="time-readout" class="time-readout" aria-live="polite">0:00 / 0:00</div>
+          <div class="controls-bar">
+            <button class="control-btn" id="prev" title="Previous spread" aria-label="Previous spread">
+              <img src="../../assets/icons/left.svg" alt="" aria-hidden="true" />
+            </button>
+            <button class="control-btn play" id="play" title="Listen" aria-label="Listen">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+            <button class="control-btn" id="next" title="Next spread" aria-label="Next spread">
+              <img src="../../assets/icons/right.svg" alt="" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        <audio id="audio" src="AUDIO_FILE" preload="auto"></audio>
+      </section>
+
+      <section class="extras" aria-label="Other ways to enjoy this story">
+        <div class="extras-title">Other ways to enjoy this story</div>
+        <div class="action-row">
+          <a class="action hifi-action disabled" href="#" title="YouTube link coming soon" aria-label="YouTube link coming soon" aria-disabled="true">
+            <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
+          </a>
+          <a class="action hifi-action disabled" href="#" title="Podcast link coming soon" aria-label="Podcast link coming soon" aria-disabled="true">
+            <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
+          </a>
+          <a class="action hifi-action disabled" href="#" title="Amazon link (for originals later)" aria-label="Amazon link (for originals later)" aria-disabled="true">
+            <img src="../../assets/icons/purchase.svg" alt="" aria-hidden="true" />
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">Story pages appear as two-page spreads. Use the arrows to turn the page.</footer>
+
+    <script>
+      const totalSpreads = TOTAL_SPREADS;
+      const pages = Array.from({ length: totalSpreads }, (_, i) => `jpg/spread ${i + 1}.jpg`);
+      let index = 0;
+
+      const spread = document.getElementById("page-spread");
+      const audio = document.getElementById("audio");
+      const playButton = document.getElementById("play");
+      const progress = document.getElementById("progress");
+      const timeReadout = document.getElementById("time-readout");
+      let isSeeking = false;
+
+      function render() {
+        const current = pages[index];
+        spread.src = encodeURI(current);
+        spread.alt = `Story spread ${index + 1}`;
+      }
+
+      function setPlayIcon(isPlaying) {
+        playButton.innerHTML = isPlaying
+          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>'
+          : '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>';
+      }
+
+      function formatTime(totalSeconds) {
+        if (!Number.isFinite(totalSeconds) || totalSeconds < 0) return "0:00";
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+        return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+      }
+
+      function updateTimeDisplay() {
+        const current = formatTime(audio.currentTime || 0);
+        const total = formatTime(audio.duration || 0);
+        timeReadout.textContent = `${current} / ${total}`;
+      }
+
+      function syncProgressRange() {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        progress.max = Math.max(1, audio.duration).toString();
+        updateTimeDisplay();
+      }
+
+      playButton.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          setPlayIcon(true);
+        } else {
+          audio.pause();
+          setPlayIcon(false);
+        }
+      });
+
+      audio.addEventListener("loadedmetadata", syncProgressRange);
+      audio.addEventListener("loadeddata", syncProgressRange);
+      audio.addEventListener("canplay", syncProgressRange);
+      audio.addEventListener("durationchange", syncProgressRange);
+
+      audio.addEventListener("timeupdate", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        if (progress.max === "0") syncProgressRange();
+        if (isSeeking) return;
+        progress.value = audio.currentTime.toString();
+        updateTimeDisplay();
+      });
+
+      audio.addEventListener("ended", () => {
+        setPlayIcon(false);
+      });
+
+      progress.addEventListener("pointerdown", () => {
+        isSeeking = true;
+      });
+
+      progress.addEventListener("pointerup", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        isSeeking = false;
+        audio.currentTime = Number(progress.value);
+        updateTimeDisplay();
+      });
+
+      progress.addEventListener("change", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        audio.currentTime = Number(progress.value);
+        updateTimeDisplay();
+      });
+
+      document.getElementById("prev").addEventListener("click", () => {
+        index = Math.max(0, index - 1);
+        render();
+      });
+
+      document.getElementById("next").addEventListener("click", () => {
+        index = Math.min(pages.length - 1, index + 1);
+        render();
+      });
+
+      render();
+      updateTimeDisplay();
+    </script>
+  </body>
+</html>
