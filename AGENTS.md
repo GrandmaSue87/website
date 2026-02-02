@@ -110,25 +110,35 @@
 - Always include: title, year, author, illustrator, narrator, GSL Library No.
 - Optional details (publisher, archive/item no., origin/context) should stay in blurb/context text unless needed in metadata list.
 
-### 4) Viewer defaults
+### 4) Social preview defaults
+- Add social preview tags in the `<head>` for each book page.
+- Use:
+  - `og:site_name`: `RetroReadAlong`
+  - `og:title`: `Book Title | Grandma Sue's Library`
+  - `og:description`: one warm line (~120–150 chars)
+  - `og:url`: full live URL for the book page
+  - `og:image`: full live URL to `jpg/front_cover.jpg`
+  - matching Twitter tags (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`)
+
+### 5) Viewer defaults
 - Storybook pages should open on interior `spread 1` (not front/back cover in viewer) unless requested otherwise.
 - Keep the top-right cover image in the hero section.
 - Keep large left/right page-turn controls.
 
-### 5) Audio controls defaults
+### 6) Audio controls defaults
 - Keep progress slider with stable seeking behavior.
 - Show live time readout on the right in `current / total` format (example `1:23 / 4:56`).
 
-### 6) Extras/actions defaults
+### 7) Extras/actions defaults
 - Show audio/YouTube/podcast/Amazon icon row.
 - If links are missing, keep icon disabled with clear tooltip text.
 - Do not add extra helper line like “Audio is ready…” unless requested.
 
-### 7) Homepage update
+### 8) Homepage update
 - Replace the next “Coming Soon” card with the new book card.
 - Card should include: cover, tags, title, short one-liner, and link to the book page.
 
-### 8) Final QA before handoff
+### 9) Final QA before handoff
 - Verify all image paths match actual folder names (`jpg/` vs `png/`).
 - Verify audio loads, play/pause works, slider seeks, and time readout updates.
 - Verify viewer arrows navigate correctly across all spreads.

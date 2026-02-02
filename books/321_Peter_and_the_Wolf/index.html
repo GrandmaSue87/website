@@ -4,6 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Peter and the Wolf | Grandma Sue's Library</title>
+    <meta
+      name="description"
+      content="A cozy 1978 read-along of Peter and the Wolf, where each character sings through the orchestra. Listen along and turn the page."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RetroReadAlong" />
+    <meta property="og:title" content="Peter and the Wolf | Grandma Sue's Library" />
+    <meta
+      property="og:description"
+      content="A cozy 1978 read-along of Peter and the Wolf, where each character sings through the orchestra. Listen along and turn the page."
+    />
+    <meta
+      property="og:url"
+      content="https://www.retroreadalong.com/books/321_Peter_and_the_Wolf/"
+    />
+    <meta
+      property="og:image"
+      content="https://www.retroreadalong.com/assets/images/peter-and-the-wolf-cover.jpg"
+    />
+    <meta property="og:image:alt" content="Peter and the Wolf book cover" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Peter and the Wolf | Grandma Sue's Library" />
+    <meta
+      property="twitter:description"
+      content="A cozy 1978 read-along of Peter and the Wolf, where each character sings through the orchestra. Listen along and turn the page."
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.retroreadalong.com/assets/images/peter-and-the-wolf-cover.jpg"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,15 +65,16 @@
               Peter and the Wolf began as a musical story created by the composer Sergei Prokofiev in 1936, written to introduce children to the sounds of the orchestra. It’s a tale where each character has its own musical voice, so the story feels like it’s being painted in sound. Even now, it’s a wonderful reminder that music can tell a story all by itself.
             </p>
             <div class="tags">
-              <span class="tag" title="Category: Read-Along Vinyl Record + Book">Read-Along Vinyl Record + Book</span>
-              <span class="tag" title="Collection: LLP Book &amp; Record">LLP Book &amp; Record</span>
-              <span class="tag" title="Publisher: Disneyland Records">Disneyland Records</span>
+              <span class="tag" title="Category: vinyl read-along record + book">vinyl read-along record + book</span>
+              <span class="tag" title="Collection: llp book &amp; record">llp book &amp; record</span>
+              <span class="tag" title="Year: 1978">1978</span>
             </div>
             <ul>
               <li><span>Year:</span> 1978</li>
               <li><span>Author:</span> Sergei Prokofiev (original story and score)</li>
               <li><span>Illustrator:</span> Not listed in this edition</li>
               <li><span>Narrator:</span> Hal Smith</li>
+              <li><span>Publisher:</span> Disneyland Records</li>
               <li><span>Grandma Sue Library No:</span> GSL-VR-001</li>
             </ul>
           </div>
@@ -94,6 +125,11 @@
       <section class="extras" aria-label="Other ways to enjoy this story">
         <div class="extras-title">Other ways to enjoy this story</div>
         <div class="action-row">
+          <button class="action hifi-action" id="share" title="Read with a friend" aria-label="Read with a friend" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M21.5 3.5l-2 16c-.1.7-.8 1.1-1.5.8l-5.9-2.4-3.1 3.2c-.3.3-.8.4-1.2.2-.4-.2-.6-.6-.6-1v-4.1l9-8.8-11 7c-.5.3-1.2.1-1.5-.4L1.2 9.7c-.3-.5-.1-1.2.5-1.4l18.2-5.9c.8-.3 1.6.4 1.5 1.1z" />
+            </svg>
+          </button>
           <a class="action hifi-action" href="https://youtu.be/SGyk72pe5x0" title="Watch on YouTube" aria-label="Watch on YouTube" target="_blank" rel="noreferrer">
             <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
           </a>
@@ -120,6 +156,8 @@
       <script>
       const totalPages = 27;
       const pages = Array.from({ length: totalPages }, (_, i) => `Scan ${i + 1}.jpg`);
+      const spreadStep = 2;
+      const lastSpreadIndex = pages.length % spreadStep === 0 ? pages.length - spreadStep : pages.length - 1;
       let index = 0;
 
       const left = document.getElementById("page-left");
@@ -129,6 +167,7 @@
       const playButton = document.getElementById("play");
       const progress = document.getElementById("progress");
       const timeReadout = document.getElementById("time-readout");
+      const shareButton = document.getElementById("share");
       let isSeeking = false;
 
       function render() {
@@ -201,6 +240,31 @@
         setPlayIcon(false);
       });
 
+      shareButton.addEventListener("click", async () => {
+        const shareData = {
+          title: document.title,
+          text: "Read with a friend",
+          url: window.location.href,
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            return;
+          }
+
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(window.location.href);
+            shareButton.title = "Link copied. Read with a friend";
+            setTimeout(() => {
+              shareButton.title = "Read with a friend";
+            }, 2000);
+          }
+        } catch (error) {
+          // User canceled share or browser blocked clipboard.
+        }
+      });
+
       progress.addEventListener("pointerdown", () => {
         isSeeking = true;
       });
@@ -219,12 +283,12 @@
       });
 
       document.getElementById("prev").addEventListener("click", () => {
-        index = Math.max(0, index - 2);
+        index = index === 0 ? lastSpreadIndex : index - spreadStep;
         render();
       });
 
       document.getElementById("next").addEventListener("click", () => {
-        index = Math.min(pages.length - 1, index + 2);
+        index = index >= lastSpreadIndex ? 0 : index + spreadStep;
         render();
       });
 
