@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BOOK_TITLE | Grandma Sue's Library</title>
+    <title>BOOK_TITLE</title>
     <meta
       name="description"
       content="SOCIAL_PREVIEW_DESCRIPTION"
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RetroReadAlong" />
-    <meta property="og:title" content="BOOK_TITLE | Grandma Sue's Library" />
+    <meta property="og:title" content="BOOK_TITLE" />
     <meta
       property="og:description"
       content="SOCIAL_PREVIEW_DESCRIPTION"
@@ -25,7 +25,7 @@
     />
     <meta property="og:image:alt" content="BOOK_TITLE book cover" />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="BOOK_TITLE | Grandma Sue's Library" />
+    <meta property="twitter:title" content="BOOK_TITLE" />
     <meta
       property="twitter:description"
       content="SOCIAL_PREVIEW_DESCRIPTION"
@@ -63,7 +63,7 @@
             <h1 class="section-title">BOOK_TITLE</h1>
             <p>WARM_BLURB_HOOK_CONTEXT_AND_BONUS_NOTE</p>
             <div class="tags">
-              <span class="tag" title="Category: CATEGORY">CATEGORY</span>
+              <span class="tag" title="Category: STORY_TYPE (vinyl read-along / storybook read-along / original read-along)">STORY_TYPE</span>
               <span class="tag" title="Collection: COLLECTION">COLLECTION</span>
               <span class="tag" title="Year: YEAR">YEAR</span>
             </div>
@@ -140,8 +140,6 @@
       </section>
     </main>
 
-    <footer class="footer">Story pages appear as two-page spreads. Use the arrows to turn the page.</footer>
-
     <script>
       const totalSpreads = TOTAL_SPREADS;
       const pages = Array.from({ length: totalSpreads }, (_, i) => `jpg/spread ${i + 1}.jpg`);
@@ -156,6 +154,9 @@
       const timeReadout = document.getElementById("time-readout");
       const shareButton = document.getElementById("share");
       let isSeeking = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let suppressClickUntil = 0;
 
       function render() {
         const current = pages[index];
@@ -168,6 +169,26 @@
         }
 
         spreadView.innerHTML = `<img src="${encodeURI(current)}" alt="Story spread ${index + 1}" />`;
+      }
+
+      function goPrev() {
+        index = index === 0 ? pages.length - 1 : index - 1;
+        render();
+      }
+
+      function goNext() {
+        index = index === pages.length - 1 ? 0 : index + 1;
+        render();
+      }
+
+      function handleTapTurn(clientX) {
+        const rect = spreadView.getBoundingClientRect();
+        const midpoint = rect.left + rect.width / 2;
+        if (clientX < midpoint) {
+          goPrev();
+        } else {
+          goNext();
+        }
       }
 
       function setPlayIcon(isPlaying) {
@@ -264,15 +285,51 @@
         updateTimeDisplay();
       });
 
-      document.getElementById("prev").addEventListener("click", () => {
-        index = index === 0 ? pages.length - 1 : index - 1;
-        render();
+      document.getElementById("prev").addEventListener("click", goPrev);
+      document.getElementById("next").addEventListener("click", goNext);
+
+      spreadView.addEventListener("click", (event) => {
+        if (Date.now() < suppressClickUntil) return;
+        handleTapTurn(event.clientX);
       });
 
-      document.getElementById("next").addEventListener("click", () => {
-        index = index === pages.length - 1 ? 0 : index + 1;
-        render();
-      });
+      spreadView.addEventListener(
+        "touchstart",
+        (event) => {
+          const touch = event.changedTouches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+        },
+        { passive: true }
+      );
+
+      spreadView.addEventListener(
+        "touchend",
+        (event) => {
+          const touch = event.changedTouches[0];
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+          const swipeThreshold = 36;
+          const maxVerticalDrift = 80;
+
+          if (
+            Math.abs(deltaX) >= swipeThreshold &&
+            Math.abs(deltaY) <= maxVerticalDrift &&
+            Math.abs(deltaX) > Math.abs(deltaY)
+          ) {
+            if (deltaX < 0) {
+              goNext();
+            } else {
+              goPrev();
+            }
+            suppressClickUntil = Date.now() + 400;
+            return;
+          }
+
+          handleTapTurn(touch.clientX);
+        },
+        { passive: true }
+      );
 
       render();
       updateTimeDisplay();

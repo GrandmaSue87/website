@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Peter and the Wolf | Grandma Sue's Library</title>
+    <title>Peter and the Wolf</title>
     <meta
       name="description"
       content="A cozy 1978 read-along of Peter and the Wolf, where each character sings through the orchestra. Listen along and turn the page."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RetroReadAlong" />
-    <meta property="og:title" content="Peter and the Wolf | Grandma Sue's Library" />
+    <meta property="og:title" content="Peter and the Wolf" />
     <meta
       property="og:description"
       content="A cozy 1978 read-along of Peter and the Wolf, where each character sings through the orchestra. Listen along and turn the page."
@@ -25,7 +25,7 @@
     />
     <meta property="og:image:alt" content="Peter and the Wolf book cover" />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Peter and the Wolf | Grandma Sue's Library" />
+    <meta property="twitter:title" content="Peter and the Wolf" />
     <meta
       property="twitter:description"
       content="A cozy 1978 read-along of Peter and the Wolf, where each character sings through the orchestra. Listen along and turn the page."
@@ -65,7 +65,7 @@
               Peter and the Wolf began as a musical story created by the composer Sergei Prokofiev in 1936, written to introduce children to the sounds of the orchestra. It’s a tale where each character has its own musical voice, so the story feels like it’s being painted in sound. Even now, it’s a wonderful reminder that music can tell a story all by itself.
             </p>
             <div class="tags">
-              <span class="tag" title="Category: vinyl read-along record + book">vinyl read-along record + book</span>
+              <span class="tag" title="Category: vinyl read-along">vinyl read-along</span>
               <span class="tag" title="Collection: llp book &amp; record">llp book &amp; record</span>
               <span class="tag" title="Year: 1978">1978</span>
             </div>
@@ -149,10 +149,6 @@
       </section>
     </main>
 
-    <footer class="footer">
-      Story pages appear as two-page spreads. Use the arrows to turn the page.
-    </footer>
-
       <script>
       const totalPages = 27;
       const pages = Array.from({ length: totalPages }, (_, i) => `Scan ${i + 1}.jpg`);
@@ -162,6 +158,7 @@
 
       const left = document.getElementById("page-left");
       const right = document.getElementById("page-right");
+      const spreadView = left.closest(".spread");
 
       const audio = document.getElementById("audio");
       const playButton = document.getElementById("play");
@@ -169,6 +166,9 @@
       const timeReadout = document.getElementById("time-readout");
       const shareButton = document.getElementById("share");
       let isSeeking = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let suppressClickUntil = 0;
 
       function render() {
         const leftPage = pages[index];
@@ -184,6 +184,26 @@
           right.removeAttribute("src");
           right.alt = "";
           right.style.opacity = "0";
+        }
+      }
+
+      function goPrev() {
+        index = index === 0 ? lastSpreadIndex : index - spreadStep;
+        render();
+      }
+
+      function goNext() {
+        index = index >= lastSpreadIndex ? 0 : index + spreadStep;
+        render();
+      }
+
+      function handleTapTurn(clientX) {
+        const rect = spreadView.getBoundingClientRect();
+        const midpoint = rect.left + rect.width / 2;
+        if (clientX < midpoint) {
+          goPrev();
+        } else {
+          goNext();
         }
       }
 
@@ -282,15 +302,51 @@
         updateTimeDisplay();
       });
 
-      document.getElementById("prev").addEventListener("click", () => {
-        index = index === 0 ? lastSpreadIndex : index - spreadStep;
-        render();
+      document.getElementById("prev").addEventListener("click", goPrev);
+      document.getElementById("next").addEventListener("click", goNext);
+
+      spreadView.addEventListener("click", (event) => {
+        if (Date.now() < suppressClickUntil) return;
+        handleTapTurn(event.clientX);
       });
 
-      document.getElementById("next").addEventListener("click", () => {
-        index = index >= lastSpreadIndex ? 0 : index + spreadStep;
-        render();
-      });
+      spreadView.addEventListener(
+        "touchstart",
+        (event) => {
+          const touch = event.changedTouches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+        },
+        { passive: true }
+      );
+
+      spreadView.addEventListener(
+        "touchend",
+        (event) => {
+          const touch = event.changedTouches[0];
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+          const swipeThreshold = 36;
+          const maxVerticalDrift = 80;
+
+          if (
+            Math.abs(deltaX) >= swipeThreshold &&
+            Math.abs(deltaY) <= maxVerticalDrift &&
+            Math.abs(deltaX) > Math.abs(deltaY)
+          ) {
+            if (deltaX < 0) {
+              goNext();
+            } else {
+              goPrev();
+            }
+            suppressClickUntil = Date.now() + 400;
+            return;
+          }
+
+          handleTapTurn(touch.clientX);
+        },
+        { passive: true }
+      );
 
       render();
       updateTimeDisplay();

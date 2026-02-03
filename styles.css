@@ -278,6 +278,9 @@ img {
 .action-row .action {
   width: 70px;
   height: 56px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
   border-radius: 18px;
   background: linear-gradient(180deg, #94a493, #7f8f7d);
   box-shadow:
