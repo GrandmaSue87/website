@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>101 Dalmatians</title>
+    <meta
+      name="description"
+      content="A cozy 1982 read-along of 101 Dalmatians from Disneyland Records, inspired by Dodie Smith's 1956 story and Disney's 1961 animated classic."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RetroReadAlong" />
+    <meta property="og:title" content="101 Dalmatians | Grandma Sue's Library" />
+    <meta
+      property="og:description"
+      content="A cozy 1982 read-along of 101 Dalmatians from Disneyland Records, inspired by Dodie Smith's 1956 story and Disney's 1961 animated classic."
+    />
+    <meta
+      property="og:url"
+      content="https://www.retroreadalong.com/books/GSL_VR_003_101dalmatians/"
+    />
+    <meta
+      property="og:image"
+      content="https://www.retroreadalong.com/books/GSL_VR_003_101dalmatians/images/cover.jpg"
+    />
+    <meta property="og:image:alt" content="101 Dalmatians book cover" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="101 Dalmatians | Grandma Sue's Library" />
+    <meta
+      property="twitter:description"
+      content="A cozy 1982 read-along of 101 Dalmatians from Disneyland Records, inspired by Dodie Smith's 1956 story and Disney's 1961 animated classic."
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.retroreadalong.com/books/GSL_VR_003_101dalmatians/images/cover.jpg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+    <style>
+      .time-readout {
+        font-size: 13px;
+        color: var(--muted);
+        text-align: right;
+        margin-top: -4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="logo" href="../../index.html" aria-label="Go to home page">
+          <img class="logo-mark" src="../../sample_files/colorlogo2.png" alt="Retro Read Along logo" />
+          Retro Read Along
+        </a>
+
+        <section class="book-hero">
+          <div class="book-meta">
+            <h1 class="section-title">101 Dalmatians</h1>
+            <p>
+              Join Pongo, Perdita, and their playful pups in this warm 1982 Disneyland Records read-along from the LLP
+              Book &amp; Record collection. The story traces back to Dodie Smith's original 1956 children's novel and
+              the beloved 1961 Disney animated film.
+            </p>
+            <div class="tags">
+              <span class="tag" title="Category: vinyl read-along">vinyl read-along</span>
+              <span class="tag" title="Collection: llp book &amp; record">llp book &amp; record</span>
+              <span class="tag" title="Year: 1982">1982</span>
+            </div>
+            <ul>
+              <li><span>Year:</span> 1982</li>
+              <li><span>Author:</span> Unknown</li>
+              <li><span>Illustrator:</span> Unknown</li>
+              <li><span>Narrator:</span> Corey Burton, Hal Smith, Patricia Parris, and Tony Pope</li>
+              <li><span>Publisher:</span> Disneyland Records</li>
+              <li><span>Grandma Sue Library No:</span> GSL-VR-003</li>
+            </ul>
+          </div>
+          <div class="cover">
+            <img src="images/cover.jpg" alt="101 Dalmatians cover" />
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="wrapper">
+      <section class="viewer" aria-label="Read along viewer">
+        <div class="spread">
+          <img id="page-left" alt="Story page left" />
+          <img id="page-right" alt="Story page right" />
+        </div>
+
+        <div class="audio-controls" aria-label="Read-along controls">
+          <input
+            type="range"
+            id="progress"
+            class="progress"
+            min="0"
+            max="0"
+            step="0.01"
+            value="0"
+            aria-label="Audio progress"
+          />
+          <div id="time-readout" class="time-readout" aria-live="polite">0:00 / 0:00</div>
+          <div class="controls-bar">
+            <button class="control-btn" id="prev" title="Turn back" aria-label="Turn back">
+              <img src="../../assets/icons/left.svg" alt="" aria-hidden="true" />
+            </button>
+            <button class="control-btn play" id="play" title="Listen" aria-label="Listen">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+            <button class="control-btn" id="next" title="Turn the page" aria-label="Turn the page">
+              <img src="../../assets/icons/right.svg" alt="" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        <audio id="audio" src="audio_narration.mp3" preload="auto"></audio>
+      </section>
+
+      <section class="extras" aria-label="Other ways to enjoy this story">
+        <div class="extras-title">Other ways to enjoy this story</div>
+        <div class="action-row">
+          <button class="action hifi-action" id="share" title="Read with a friend" aria-label="Read with a friend" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M21.5 3.5l-2 16c-.1.7-.8 1.1-1.5.8l-5.9-2.4-3.1 3.2c-.3.3-.8.4-1.2.2-.4-.2-.6-.6-.6-1v-4.1l9-8.8-11 7c-.5.3-1.2.1-1.5-.4L1.2 9.7c-.3-.5-.1-1.2.5-1.4l18.2-5.9c.8-.3 1.6.4 1.5 1.1z" />
+            </svg>
+          </button>
+          <a
+            class="action hifi-action"
+            href="https://youtu.be/xQrgzK4OJjI"
+            title="Watch on YouTube"
+            aria-label="Watch on YouTube"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
+          </a>
+          <a
+            class="action hifi-action"
+            href="https://open.spotify.com/episode/6qfhPveDnfTM8ZUKH36bff?si=diA90wuWSm2hsZ-x8b_CIA"
+            title="Listen on Spotify"
+            aria-label="Listen on Spotify"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
+          </a>
+          <a
+            class="action hifi-action disabled"
+            href="#"
+            title="Amazon link (for originals later)"
+            aria-label="Amazon link (for originals later)"
+            aria-disabled="true"
+          >
+            <img src="../../assets/icons/purchase.svg" alt="" aria-hidden="true" />
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const totalPages = 26;
+      const pages = Array.from({ length: totalPages }, (_, i) => `images/Scan ${i + 1}.jpg`);
+      const spreadStep = 2;
+      const lastSpreadIndex = pages.length % spreadStep === 0 ? pages.length - spreadStep : pages.length - 1;
+      let index = 0;
+
+      const left = document.getElementById("page-left");
+      const right = document.getElementById("page-right");
+      const spreadView = left.closest(".spread");
+
+      const audio = document.getElementById("audio");
+      const playButton = document.getElementById("play");
+      const progress = document.getElementById("progress");
+      const timeReadout = document.getElementById("time-readout");
+      const shareButton = document.getElementById("share");
+      let isSeeking = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let suppressClickUntil = 0;
+
+      function render() {
+        const leftPage = pages[index];
+        const rightPage = pages[index + 1];
+        left.src = encodeURI(leftPage);
+        left.alt = `Story page ${index + 1}`;
+
+        if (rightPage) {
+          right.src = encodeURI(rightPage);
+          right.alt = `Story page ${index + 2}`;
+          right.style.opacity = "1";
+        } else {
+          right.removeAttribute("src");
+          right.alt = "";
+          right.style.opacity = "0";
+        }
+      }
+
+      function goPrev() {
+        index = index === 0 ? lastSpreadIndex : index - spreadStep;
+        render();
+      }
+
+      function goNext() {
+        index = index >= lastSpreadIndex ? 0 : index + spreadStep;
+        render();
+      }
+
+      function handleTapTurn(clientX) {
+        const rect = spreadView.getBoundingClientRect();
+        const midpoint = rect.left + rect.width / 2;
+        if (clientX < midpoint) {
+          goPrev();
+        } else {
+          goNext();
+        }
+      }
+
+      function setPlayIcon(isPlaying) {
+        playButton.innerHTML = isPlaying
+          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>'
+          : '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>';
+      }
+
+      playButton.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          setPlayIcon(true);
+        } else {
+          audio.pause();
+          setPlayIcon(false);
+        }
+      });
+
+      function syncProgressRange() {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        progress.max = Math.max(1, audio.duration).toString();
+        updateTimeDisplay();
+      }
+
+      function formatTime(totalSeconds) {
+        if (!Number.isFinite(totalSeconds) || totalSeconds < 0) return "0:00";
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+        return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+      }
+
+      function updateTimeDisplay() {
+        const current = formatTime(audio.currentTime || 0);
+        const total = formatTime(audio.duration || 0);
+        timeReadout.textContent = `${current} / ${total}`;
+      }
+
+      audio.addEventListener("loadedmetadata", syncProgressRange);
+      audio.addEventListener("loadeddata", syncProgressRange);
+      audio.addEventListener("canplay", syncProgressRange);
+      audio.addEventListener("durationchange", syncProgressRange);
+
+      audio.addEventListener("timeupdate", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        if (progress.max === "0") syncProgressRange();
+        if (isSeeking) return;
+        progress.value = audio.currentTime.toString();
+        updateTimeDisplay();
+      });
+
+      audio.addEventListener("ended", () => {
+        setPlayIcon(false);
+      });
+
+      shareButton.addEventListener("click", async () => {
+        const shareData = {
+          title: document.title,
+          text: "Read with a friend",
+          url: window.location.href,
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            return;
+          }
+
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(window.location.href);
+            shareButton.title = "Link copied. Read with a friend";
+            setTimeout(() => {
+              shareButton.title = "Read with a friend";
+            }, 2000);
+          }
+        } catch (error) {
+          // User canceled share or browser blocked clipboard.
+        }
+      });
+
+      progress.addEventListener("pointerdown", () => {
+        isSeeking = true;
+      });
+
+      progress.addEventListener("pointerup", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        isSeeking = false;
+        audio.currentTime = Number(progress.value);
+        updateTimeDisplay();
+      });
+
+      progress.addEventListener("change", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        audio.currentTime = Number(progress.value);
+        updateTimeDisplay();
+      });
+
+      document.getElementById("prev").addEventListener("click", goPrev);
+      document.getElementById("next").addEventListener("click", goNext);
+
+      spreadView.addEventListener("click", (event) => {
+        if (Date.now() < suppressClickUntil) return;
+        handleTapTurn(event.clientX);
+      });
+
+      spreadView.addEventListener(
+        "touchstart",
+        (event) => {
+          const touch = event.changedTouches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+        },
+        { passive: true }
+      );
+
+      spreadView.addEventListener(
+        "touchend",
+        (event) => {
+          const touch = event.changedTouches[0];
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+          const swipeThreshold = 36;
+          const maxVerticalDrift = 80;
+
+          if (
+            Math.abs(deltaX) >= swipeThreshold &&
+            Math.abs(deltaY) <= maxVerticalDrift &&
+            Math.abs(deltaX) > Math.abs(deltaY)
+          ) {
+            if (deltaX < 0) {
+              goNext();
+            } else {
+              goPrev();
+            }
+            suppressClickUntil = Date.now() + 400;
+            return;
+          }
+
+          handleTapTurn(touch.clientX);
+        },
+        { passive: true }
+      );
+
+      render();
+      updateTimeDisplay();
+    </script>
+  </body>
+</html>
