@@ -99,6 +99,7 @@
 ### 1) Gather assets + links
 - Confirm folder name under `books/` (example: `books/GSL_SR_002`).
 - Confirm cover + spread images are `.jpg` (convert from `.png` if needed).
+- After JPG conversion, delete source `.png` files in that book folder to conserve space (or use `--delete` in the optimization script).
 - Confirm audio filename and available links (YouTube, podcast, optional Amazon).
 
 ### 2) Build top content block
@@ -146,8 +147,8 @@
 
 ## Weekly image optimization (one book at a time)
 - Goal sizes: pages 1200–1600 px square, ~200–500 KB each; covers ~300–700 KB.
-- Use the script: `scripts/optimize_book_images.sh books/BOOK_FOLDER --delete`
-- Example: `scripts/optimize_book_images.sh books/321_Peter_and_the_Wolf --delete`
+- Use the script: `scripts/optimize_book_images.sh books/BOOK_FOLDER`
+- Example: `scripts/optimize_book_images.sh books/321_Peter_and_the_Wolf`
 - After converting, update the book HTML to use `.jpg` for pages and cover.
 
 ## Interaction ideas (later)
