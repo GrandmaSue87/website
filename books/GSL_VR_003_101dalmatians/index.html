@@ -92,7 +92,6 @@
         <div class="spread">
           <img id="page-left" alt="Story page left" />
           <img id="page-right" alt="Story page right" />
-          <div id="page-right-blank" class="page-blank" aria-hidden="true" hidden></div>
         </div>
 
         <div class="audio-controls" aria-label="Read-along controls">
@@ -169,15 +168,12 @@
     <script>
       const totalPages = 26;
       const pages = Array.from({ length: totalPages }, (_, i) => `images/Scan ${i + 1}.jpg`);
-      const backCoverPage = "images/backcover.jpg";
-      pages.push(backCoverPage);
       const spreadStep = 2;
-      const lastSpreadIndex = pages.length % spreadStep === 0 ? pages.length - spreadStep : pages.length - 1;
+      const lastSpreadIndex = pages.length - spreadStep;
       let index = 0;
 
       const left = document.getElementById("page-left");
       const right = document.getElementById("page-right");
-      const rightBlank = document.getElementById("page-right-blank");
       const spreadView = left.closest(".spread");
 
       const audio = document.getElementById("audio");
@@ -194,19 +190,9 @@
         const leftPage = pages[index];
         const rightPage = pages[index + 1];
         left.src = encodeURI(leftPage);
-        left.alt = leftPage === backCoverPage ? "Back cover" : `Story page ${index + 1}`;
-
-        if (rightPage) {
-          right.src = encodeURI(rightPage);
-          right.alt = `Story page ${index + 2}`;
-          right.hidden = false;
-          rightBlank.hidden = true;
-        } else {
-          right.removeAttribute("src");
-          right.alt = "";
-          right.hidden = true;
-          rightBlank.hidden = false;
-        }
+        left.alt = `Story page ${index + 1}`;
+        right.src = encodeURI(rightPage);
+        right.alt = `Story page ${index + 2}`;
       }
 
       function goPrev() {
