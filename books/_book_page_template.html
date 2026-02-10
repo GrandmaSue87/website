@@ -143,8 +143,11 @@
     <script>
       const totalSpreads = TOTAL_SPREADS;
       const pages = Array.from({ length: totalSpreads }, (_, i) => `jpg/spread ${i + 1}.jpg`);
+      const includeBackCoverAtEnd = true;
       const backCoverPage = "jpg/back_cover.jpg";
-      pages.push(backCoverPage);
+      if (includeBackCoverAtEnd) {
+        pages.push(backCoverPage);
+      }
       let index = 0;
 
       const spreadView = document.getElementById("spread-view");
@@ -160,7 +163,7 @@
 
       function render() {
         const current = pages[index];
-        if (current === backCoverPage) {
+        if (includeBackCoverAtEnd && current === backCoverPage) {
           spreadView.innerHTML = `
             <img src="${encodeURI(current)}" alt="Back cover" />
             <div class="page-blank" aria-hidden="true"></div>
