@@ -92,6 +92,7 @@
         <div class="spread">
           <img id="page-left" alt="Story page left" />
           <img id="page-right" alt="Story page right" />
+          <div id="page-right-blank" class="page-blank" aria-hidden="true" hidden></div>
         </div>
 
         <div class="audio-controls" aria-label="Read-along controls">
@@ -143,12 +144,11 @@
             <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
           </a>
           <a
-            class="action hifi-action"
-            href="https://open.spotify.com/episode/6qfhPveDnfTM8ZUKH36bff?si=diA90wuWSm2hsZ-x8b_CIA"
-            title="Listen on Spotify"
-            aria-label="Listen on Spotify"
-            target="_blank"
-            rel="noopener noreferrer"
+            class="action hifi-action disabled"
+            href="#"
+            title="Podcast link coming soon"
+            aria-label="Podcast link coming soon"
+            aria-disabled="true"
           >
             <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
           </a>
@@ -168,12 +168,18 @@
     <script>
       const totalPages = 26;
       const pages = Array.from({ length: totalPages }, (_, i) => `images/Scan ${i + 1}.jpg`);
+      const includeBackCoverAtEnd = true;
+      const backCoverPage = "images/backcover.jpg";
+      if (includeBackCoverAtEnd) {
+        pages.push(backCoverPage);
+      }
       const spreadStep = 2;
-      const lastSpreadIndex = pages.length - spreadStep;
+      const lastSpreadIndex = includeBackCoverAtEnd ? pages.length - 1 : pages.length - spreadStep;
       let index = 0;
 
       const left = document.getElementById("page-left");
       const right = document.getElementById("page-right");
+      const rightBlank = document.getElementById("page-right-blank");
       const spreadView = left.closest(".spread");
 
       const audio = document.getElementById("audio");
@@ -188,9 +194,20 @@
 
       function render() {
         const leftPage = pages[index];
-        const rightPage = pages[index + 1];
         left.src = encodeURI(leftPage);
+        if (includeBackCoverAtEnd && leftPage === backCoverPage) {
+          left.alt = "Back cover";
+          right.hidden = true;
+          rightBlank.hidden = false;
+          right.removeAttribute("src");
+          right.removeAttribute("alt");
+          return;
+        }
+
+        const rightPage = pages[index + 1];
         left.alt = `Story page ${index + 1}`;
+        right.hidden = false;
+        rightBlank.hidden = true;
         right.src = encodeURI(rightPage);
         right.alt = `Story page ${index + 2}`;
       }
