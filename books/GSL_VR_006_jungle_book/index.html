@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Jungle Book | Grandma Sue's Library</title>
+    <meta
+      name="description"
+      content="A warm 1977 Disneyland Records read-along of The Jungle Book, inspired by Rudyard Kipling's 1894 Mowgli stories and Disney's 1967 film."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RetroReadAlong" />
+    <meta property="og:title" content="The Jungle Book | Grandma Sue's Library" />
+    <meta
+      property="og:description"
+      content="A warm 1977 Disneyland Records read-along of The Jungle Book, inspired by Rudyard Kipling's 1894 Mowgli stories and Disney's 1967 film."
+    />
+    <meta
+      property="og:url"
+      content="https://www.retroreadalong.com/books/GSL_VR_006_jungle_book/"
+    />
+    <meta
+      property="og:image"
+      content="https://www.retroreadalong.com/books/GSL_VR_006_jungle_book/images/cover.jpg"
+    />
+    <meta property="og:image:alt" content="The Jungle Book book cover" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="The Jungle Book | Grandma Sue's Library" />
+    <meta
+      property="twitter:description"
+      content="A warm 1977 Disneyland Records read-along of The Jungle Book, inspired by Rudyard Kipling's 1894 Mowgli stories and Disney's 1967 film."
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.retroreadalong.com/books/GSL_VR_006_jungle_book/images/cover.jpg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+    <style>
+      .time-readout {
+        font-size: 13px;
+        color: var(--muted);
+        text-align: right;
+        margin-top: -4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="logo" href="../../index.html" aria-label="Go to home page">
+          <img class="logo-mark" src="../../sample_files/colorlogo2.png" alt="Retro Read Along logo" />
+          Retro Read Along
+        </a>
+
+        <section class="book-hero">
+          <div class="book-meta">
+            <h1 class="section-title">The Jungle Book</h1>
+            <p>
+              Step into the jungle with Mowgli in this cozy 1977 LLP Book &amp; Record edition from Disneyland Records,
+              inspired by Rudyard Kipling's 1894 Mowgli stories and the beloved 1967 Disney film adaptation.
+            </p>
+            <div class="tags">
+              <span class="tag" title="Category: vinyl read-along">vinyl read-along</span>
+              <span class="tag" title="Collection: llp book &amp; record">llp book &amp; record</span>
+              <span class="tag" title="Year: 1977">1977</span>
+            </div>
+            <ul>
+              <li><span>Title:</span> The Jungle Book</li>
+              <li><span>Year:</span> 1977</li>
+              <li><span>Author:</span> Unknown</li>
+              <li><span>Illustrator:</span> Unknown</li>
+              <li><span>Narrator:</span> Laurie Main</li>
+              <li><span>GSL Library No:</span> GSL-VR-006</li>
+            </ul>
+          </div>
+          <div class="cover">
+            <img src="images/cover.jpg" alt="The Jungle Book cover" />
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="wrapper">
+      <section class="viewer" aria-label="Read along viewer">
+        <div class="spread">
+          <img id="page-left" alt="Story page left" />
+          <img id="page-right" alt="Story page right" />
+          <div id="page-right-blank" class="page-blank" aria-hidden="true" hidden></div>
+        </div>
+
+        <div class="audio-controls" aria-label="Read-along controls">
+          <input
+            type="range"
+            id="progress"
+            class="progress"
+            min="0"
+            max="0"
+            step="0.01"
+            value="0"
+            aria-label="Audio progress"
+          />
+          <div id="time-readout" class="time-readout" aria-live="polite">0:00 / 0:00</div>
+          <div class="controls-bar">
+            <button class="control-btn" id="prev" title="Turn back" aria-label="Turn back">
+              <img src="../../assets/icons/left.svg" alt="" aria-hidden="true" />
+            </button>
+            <button class="control-btn play" id="play" title="Listen" aria-label="Listen">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+            <button class="control-btn" id="next" title="Turn the page" aria-label="Turn the page">
+              <img src="../../assets/icons/right.svg" alt="" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        <audio id="audio" src="audio_jungle_book.mp3" preload="auto"></audio>
+      </section>
+
+      <section class="extras" aria-label="Other ways to enjoy this story">
+        <div class="extras-title">Other ways to enjoy this story</div>
+        <div class="action-row">
+          <button class="action hifi-action" id="share" title="Read with a friend" aria-label="Read with a friend" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M21.5 3.5l-2 16c-.1.7-.8 1.1-1.5.8l-5.9-2.4-3.1 3.2c-.3.3-.8.4-1.2.2-.4-.2-.6-.6-.6-1v-4.1l9-8.8-11 7c-.5.3-1.2.1-1.5-.4L1.2 9.7c-.3-.5-.1-1.2.5-1.4l18.2-5.9c.8-.3 1.6.4 1.5 1.1z" />
+            </svg>
+          </button>
+          <a
+            class="action hifi-action disabled"
+            href="#"
+            title="YouTube link coming soon"
+            aria-label="YouTube link coming soon"
+            aria-disabled="true"
+          >
+            <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
+          </a>
+          <a
+            class="action hifi-action disabled"
+            href="#"
+            title="Podcast link coming soon"
+            aria-label="Podcast link coming soon"
+            aria-disabled="true"
+          >
+            <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
+          </a>
+          <a
+            class="action hifi-action disabled"
+            href="#"
+            title="Amazon link (for originals later)"
+            aria-label="Amazon link (for originals later)"
+            aria-disabled="true"
+          >
+            <img src="../../assets/icons/purchase.svg" alt="" aria-hidden="true" />
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const totalPages = 26;
+      const pages = Array.from({ length: totalPages }, (_, i) => `images/Scan ${i + 1}.jpg`);
+      const includeBackCoverAtEnd = true;
+      const backCoverPage = "images/back_cover.jpg";
+      if (includeBackCoverAtEnd) {
+        pages.push(backCoverPage);
+      }
+      const spreadStep = 2;
+      const lastSpreadIndex = includeBackCoverAtEnd ? pages.length - 1 : pages.length - spreadStep;
+      let index = 0;
+
+      const left = document.getElementById("page-left");
+      const right = document.getElementById("page-right");
+      const rightBlank = document.getElementById("page-right-blank");
+      const spreadView = left.closest(".spread");
+
+      const audio = document.getElementById("audio");
+      const playButton = document.getElementById("play");
+      const progress = document.getElementById("progress");
+      const timeReadout = document.getElementById("time-readout");
+      const shareButton = document.getElementById("share");
+      let isSeeking = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let suppressClickUntil = 0;
+
+      function render() {
+        const leftPage = pages[index];
+        left.src = encodeURI(leftPage);
+        if (includeBackCoverAtEnd && leftPage === backCoverPage) {
+          left.alt = "Back cover";
+          right.hidden = true;
+          rightBlank.hidden = false;
+          right.removeAttribute("src");
+          right.removeAttribute("alt");
+          return;
+        }
+
+        const rightPage = pages[index + 1];
+        left.alt = `Story page ${index + 1}`;
+        right.hidden = false;
+        rightBlank.hidden = true;
+        right.src = encodeURI(rightPage);
+        right.alt = `Story page ${index + 2}`;
+      }
+
+      function goPrev() {
+        index = index === 0 ? lastSpreadIndex : index - spreadStep;
+        render();
+      }
+
+      function goNext() {
+        index = index >= lastSpreadIndex ? 0 : index + spreadStep;
+        render();
+      }
+
+      function handleTapTurn(clientX) {
+        const rect = spreadView.getBoundingClientRect();
+        const midpoint = rect.left + rect.width / 2;
+        if (clientX < midpoint) {
+          goPrev();
+        } else {
+          goNext();
+        }
+      }
+
+      function setPlayIcon(isPlaying) {
+        playButton.innerHTML = isPlaying
+          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>'
+          : '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>';
+      }
+
+      playButton.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          setPlayIcon(true);
+        } else {
+          audio.pause();
+          setPlayIcon(false);
+        }
+      });
+
+      function syncProgressRange() {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        progress.max = Math.max(1, audio.duration).toString();
+        updateTimeDisplay();
+      }
+
+      function formatTime(totalSeconds) {
+        if (!Number.isFinite(totalSeconds) || totalSeconds < 0) return "0:00";
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+        return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+      }
+
+      function updateTimeDisplay() {
+        const current = formatTime(audio.currentTime || 0);
+        const total = formatTime(audio.duration || 0);
+        timeReadout.textContent = `${current} / ${total}`;
+      }
+
+      audio.addEventListener("loadedmetadata", syncProgressRange);
+      audio.addEventListener("loadeddata", syncProgressRange);
+      audio.addEventListener("canplay", syncProgressRange);
+      audio.addEventListener("durationchange", syncProgressRange);
+
+      audio.addEventListener("timeupdate", () => {
+        if (!audio.duration || Number.isNaN(audio.duration)) return;
+        if (progress.max === "0") syncProgressRange();
+        if (isSeeking) return;
+        progress.value = audio.currentTime.toString();
+        updateTimeDisplay();
+      });
+
+      audio.addEventListener("ended", () => {
+        setPlayIcon(false);
+      });
+
+      progress.addEventListener("input", () => {
+        isSeeking = true;
+        const targetTime = Number(progress.value);
+        if (Number.isFinite(targetTime)) {
+          audio.currentTime = targetTime;
+          updateTimeDisplay();
+        }
+      });
+
+      progress.addEventListener("change", () => {
+        isSeeking = false;
+      });
+
+      shareButton.addEventListener("click", async () => {
+        const shareData = {
+          title: document.title,
+          text: "Read with a friend",
+          url: window.location.href,
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            return;
+          }
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(shareData.url);
+            shareButton.title = "Link copied";
+            shareButton.setAttribute("aria-label", "Link copied");
+            setTimeout(() => {
+              shareButton.title = "Read with a friend";
+              shareButton.setAttribute("aria-label", "Read with a friend");
+            }, 1600);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      });
+
+      document.getElementById("prev").addEventListener("click", goPrev);
+      document.getElementById("next").addEventListener("click", goNext);
+
+      spreadView.addEventListener("click", (event) => {
+        if (Date.now() < suppressClickUntil) return;
+        handleTapTurn(event.clientX);
+      });
+
+      spreadView.addEventListener(
+        "touchstart",
+        (event) => {
+          const touch = event.changedTouches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+        },
+        { passive: true }
+      );
+
+      spreadView.addEventListener("touchend", (event) => {
+        const touch = event.changedTouches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+        const absDx = Math.abs(dx);
+        const absDy = Math.abs(dy);
+
+        if (absDx > 40 && absDx > absDy) {
+          if (dx > 0) {
+            goPrev();
+          } else {
+            goNext();
+          }
+          suppressClickUntil = Date.now() + 350;
+          return;
+        }
+
+        if (absDx < 10 && absDy < 10) {
+          handleTapTurn(touch.clientX);
+          suppressClickUntil = Date.now() + 350;
+        }
+      });
+
+      render();
+      updateTimeDisplay();
+    </script>
+  </body>
+</html>
