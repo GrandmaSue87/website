@@ -163,6 +163,7 @@
 
       function render() {
         const current = pages[index];
+        // Replace spread HTML each render so back-cover mode cannot keep stale extra page slots.
         if (includeBackCoverAtEnd && current === backCoverPage) {
           spreadView.innerHTML = `
             <img src="${encodeURI(current)}" alt="Back cover" />

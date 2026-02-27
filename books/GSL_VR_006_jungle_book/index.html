@@ -89,11 +89,7 @@
 
     <main class="wrapper">
       <section class="viewer" aria-label="Read along viewer">
-        <div class="spread">
-          <img id="page-left" alt="Story page left" />
-          <img id="page-right" alt="Story page right" />
-          <div id="page-right-blank" class="page-blank" aria-hidden="true" hidden></div>
-        </div>
+        <div class="spread" id="spread-view"></div>
 
         <div class="audio-controls" aria-label="Read-along controls">
           <input
@@ -134,20 +130,22 @@
             </svg>
           </button>
           <a
-            class="action hifi-action disabled"
-            href="#"
-            title="YouTube link coming soon"
-            aria-label="YouTube link coming soon"
-            aria-disabled="true"
+            class="action hifi-action"
+            href="https://youtu.be/R72P-44N8XQ"
+            title="Watch on YouTube"
+            aria-label="Watch on YouTube"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
           </a>
           <a
-            class="action hifi-action disabled"
-            href="#"
-            title="Podcast link coming soon"
-            aria-label="Podcast link coming soon"
-            aria-disabled="true"
+            class="action hifi-action"
+            href="https://open.spotify.com/episode/3OkIdcRH7BihF5lkhZuYzk?si=fQBH5PuHRIuCGXGnbqXQvQ"
+            title="Listen on Spotify"
+            aria-label="Listen on Spotify"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
           </a>
@@ -176,10 +174,7 @@
       const lastSpreadIndex = includeBackCoverAtEnd ? pages.length - 1 : pages.length - spreadStep;
       let index = 0;
 
-      const left = document.getElementById("page-left");
-      const right = document.getElementById("page-right");
-      const rightBlank = document.getElementById("page-right-blank");
-      const spreadView = left.closest(".spread");
+      const spreadView = document.getElementById("spread-view");
 
       const audio = document.getElementById("audio");
       const playButton = document.getElementById("play");
@@ -193,22 +188,19 @@
 
       function render() {
         const leftPage = pages[index];
-        left.src = encodeURI(leftPage);
         if (includeBackCoverAtEnd && leftPage === backCoverPage) {
-          left.alt = "Back cover";
-          right.hidden = true;
-          rightBlank.hidden = false;
-          right.removeAttribute("src");
-          right.removeAttribute("alt");
+          spreadView.innerHTML = `
+            <img src="${encodeURI(leftPage)}" alt="Back cover" />
+            <div class="page-blank" aria-hidden="true"></div>
+          `;
           return;
         }
 
         const rightPage = pages[index + 1];
-        left.alt = `Story page ${index + 1}`;
-        right.hidden = false;
-        rightBlank.hidden = true;
-        right.src = encodeURI(rightPage);
-        right.alt = `Story page ${index + 2}`;
+        spreadView.innerHTML = `
+          <img src="${encodeURI(leftPage)}" alt="Story page ${index + 1}" />
+          <img src="${encodeURI(rightPage)}" alt="Story page ${index + 2}" />
+        `;
       }
 
       function goPrev() {
