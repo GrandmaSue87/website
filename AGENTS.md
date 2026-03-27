@@ -136,7 +136,9 @@
 - Do not add extra helper line like “Audio is ready…” unless requested.
 
 ### 8) Homepage update
-- Replace the next “Coming Soon” card with the new book card.
+- Keep one permanent “Coming Soon” card pinned as the first card on the homepage.
+- Do not remove or replace that first “Coming Soon” card unless explicitly requested.
+- Add each new weekly book immediately after the pinned “Coming Soon” card (as the most recent book).
 - Card should include: cover, tags, title, short one-liner, and link to the book page.
 
 ### 9) Final QA before handoff
