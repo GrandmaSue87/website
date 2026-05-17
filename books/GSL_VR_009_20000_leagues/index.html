@@ -188,8 +188,9 @@
         "jpg/Scan 24.jpg",
         "jpg/Scan 25.jpg",
       ];
+      const backCoverPage = "jpg/back_cover.jpg";
       const spreadStep = 2;
-      const lastSpreadIndex = pages.length - spreadStep;
+      const lastSpreadIndex = pages.length;
       let index = 0;
 
       const spreadView = document.getElementById("spread-view");
@@ -206,12 +207,22 @@
       let suppressClickUntil = 0;
 
       function render() {
+        if (index === pages.length) {
+          left.src = encodeURI(backCoverPage);
+          left.alt = "Back cover";
+          right.removeAttribute("src");
+          right.alt = "Blank page";
+          right.style.opacity = "0";
+          return;
+        }
+
         const leftPage = pages[index];
         const rightPage = pages[index + 1];
         left.src = encodeURI(leftPage);
         left.alt = `Story page ${index + 1}`;
         right.src = encodeURI(rightPage);
-        right.alt = `Story page ${index + 2}`;
+        right.alt = `Story page ${Math.min(index + 2, pages.length)}`;
+        right.style.opacity = "1";
       }
 
       function goPrev() {

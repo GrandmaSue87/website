@@ -143,6 +143,8 @@
     <script>
       const totalSpreads = TOTAL_SPREADS;
       const pages = Array.from({ length: totalSpreads }, (_, i) => `jpg/spread ${i + 1}.jpg`);
+      // Keep this true by default so the final turn shows:
+      // back cover on the left + blank page on the right.
       const includeBackCoverAtEnd = true;
       const backCoverPage = "jpg/back_cover.jpg";
       if (includeBackCoverAtEnd) {
