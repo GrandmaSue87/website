@@ -147,7 +147,14 @@
           >
             <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
           </a>
-          <a class="action hifi-action disabled" href="#" title="Purchase link coming soon" aria-label="Purchase link coming soon" aria-disabled="true">
+          <a
+            class="action hifi-action"
+            href="https://www.amazon.com/dp/B0H5VRNHMM?spcref=PRINT_LISTING"
+            title="View on Amazon"
+            aria-label="View on Amazon"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="../../assets/icons/purchase.svg" alt="" aria-hidden="true" />
           </a>
         </div>
@@ -156,26 +163,23 @@
 
     <script>
       const pages = [
-        ["jpg/This book belongs to.jpg", "jpg/Title.jpg"],
-        ["jpg/1.jpg", "jpg/2.jpg"],
-        ["jpg/3.jpg", "jpg/4.jpg"],
-        ["jpg/5.jpg", "jpg/6.jpg"],
-        ["jpg/7.jpg", "jpg/8.jpg"],
-        ["jpg/9.jpg", "jpg/10.jpg"],
-        ["jpg/11.jpg", "jpg/12.jpg"],
-        ["jpg/13.jpg", "jpg/14.jpg"],
-        ["jpg/15.jpg", "jpg/16.jpg"],
-        ["jpg/17.jpg", "jpg/18.jpg"],
-        ["jpg/19.jpg", "jpg/20.jpg"],
-        ["jpg/21.jpg", "jpg/22.jpg"],
-        ["jpg/23.jpg", "jpg/24.jpg"],
-        ["jpg/Meet the Authors.jpg", "jpg/record sleeve.jpg"]
+        [null, "jpg/00.jpg"],
+        ["jpg/0.jpg", "jpg/1.jpg"],
+        ["jpg/2.jpg", "jpg/3.jpg"],
+        ["jpg/4.jpg", "jpg/5.jpg"],
+        ["jpg/6.jpg", "jpg/7.jpg"],
+        ["jpg/8.jpg", "jpg/9.jpg"],
+        ["jpg/10.jpg", "jpg/11.jpg"],
+        ["jpg/12.jpg", "jpg/13.jpg"],
+        ["jpg/14.jpg", "jpg/15.jpg"],
+        ["jpg/16.jpg", "jpg/17.jpg"],
+        ["jpg/18.jpg", "jpg/19.jpg"],
+        ["jpg/20.jpg", "jpg/21.jpg"],
+        ["jpg/22.jpg", "jpg/23.jpg"],
+        ["jpg/24.jpg", "jpg/25.jpg"],
+        ["jpg/26.jpg", null]
       ];
-      const includeBackCoverAtEnd = true;
-      const backCoverPage = "jpg/back_cover.jpg";
-      if (includeBackCoverAtEnd) {
-        pages.push([backCoverPage, null]);
-      }
+      pages.push(["jpg/back_cover.jpg", null]);
       let index = 0;
 
       const spreadView = document.getElementById("spread-view");
@@ -191,17 +195,9 @@
 
       function render() {
         const [leftPage, rightPage] = pages[index];
-        if (includeBackCoverAtEnd && leftPage === backCoverPage) {
-          spreadView.innerHTML = `
-            <img src="${encodeURI(leftPage)}" alt="Back cover" />
-            <div class="page-blank" aria-hidden="true"></div>
-          `;
-          return;
-        }
-
         spreadView.innerHTML = `
-          <img src="${encodeURI(leftPage)}" alt="Story page ${index * 2 + 1}" />
-          <img src="${encodeURI(rightPage)}" alt="Story page ${index * 2 + 2}" />
+          ${leftPage ? `<img src="${encodeURI(leftPage)}" alt="Story page ${index * 2 + 1}" />` : '<div class="page-blank" aria-hidden="true"></div>'}
+          ${rightPage ? `<img src="${encodeURI(rightPage)}" alt="Story page ${index * 2 + 2}" />` : '<div class="page-blank" aria-hidden="true"></div>'}
         `;
       }
 
