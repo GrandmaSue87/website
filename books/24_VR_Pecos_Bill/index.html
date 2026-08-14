@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pecos Bill | Grandma Sue's Library</title>
+    <meta name="description" content="Meet Pecos Bill in this 1970 Disneyland Records LLP Book & Record read-along, narrated by Robbie Lester and rooted in American folklore." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RetroReadAlong" />
+    <meta property="og:title" content="Pecos Bill | Grandma Sue's Library" />
+    <meta property="og:description" content="Meet Pecos Bill in this 1970 Disneyland Records read-along, narrated by Robbie Lester and rooted in American folklore." />
+    <meta property="og:url" content="https://www.retroreadalong.com/books/24_VR_Pecos_Bill/" />
+    <meta property="og:image" content="https://www.retroreadalong.com/books/24_VR_Pecos_Bill/jpg/front_cover.jpg" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Pecos Bill | Grandma Sue's Library" />
+    <meta property="twitter:description" content="Meet Pecos Bill in this 1970 Disneyland Records read-along, narrated by Robbie Lester and rooted in American folklore." />
+    <meta property="twitter:image" content="https://www.retroreadalong.com/books/24_VR_Pecos_Bill/jpg/front_cover.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <style>.time-readout { font-size: 13px; color: var(--muted); text-align: right; margin-top: -4px; }</style>
+  </head>
+  <body>
+    <header class="site-header"><div class="wrapper">
+      <a class="logo" href="../../index.html" aria-label="Go to home page"><img class="logo-mark" src="../../sample_files/colorlogo2.png" alt="" /> Retro Read Along</a>
+      <section class="book-hero">
+        <div class="book-meta">
+          <h1 class="section-title">Pecos Bill</h1>
+          <p>Round up a tall tale with Pecos Bill in this 1970 Disneyland Records LLP Book &amp; Record edition. Robbie Lester narrates this lively slice of American folklore, first recorded in writing in 1917 by Edward O'Riley.</p>
+          <div class="tags"><span class="tag" title="Category: vinyl read-along">vinyl read-along</span><span class="tag" title="Collection: LLP Book &amp; Record">LLP Book &amp; Record</span><span class="tag" title="Year: 1970">1970</span></div>
+          <ul>
+            <li><span>Title:</span> Pecos Bill</li><li><span>Year:</span> 1970</li><li><span>Author:</span> Unknown</li><li><span>Illustrator:</span> Unknown</li><li><span>Narrator:</span> Robbie Lester</li><li><span>GSL Library No:</span> GSL-VR-024</li>
+          </ul>
+        </div>
+        <div class="cover"><img src="jpg/front_cover.jpg" alt="Pecos Bill cover" /></div>
+      </section>
+    </div></header>
+    <main class="wrapper">
+      <section class="viewer" aria-label="Read along viewer">
+        <div class="spread" id="spread-view"><img id="page-left" alt="Story page left" /><img id="page-right" alt="Story page right" /></div>
+        <div class="audio-controls" aria-label="Read-along controls">
+          <input type="range" id="progress" class="progress" min="0" max="0" step="0.01" value="0" aria-label="Audio progress" />
+          <div id="time-readout" class="time-readout" aria-live="polite">0:00 / 0:00</div>
+          <div class="controls-bar"><button class="control-btn" id="prev" title="Previous spread" aria-label="Previous spread"><img src="../../assets/icons/left.svg" alt="" /></button><button class="control-btn play" id="play" title="Listen" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z" /></svg></button><button class="control-btn" id="next" title="Next spread" aria-label="Next spread"><img src="../../assets/icons/right.svg" alt="" /></button></div>
+        </div>
+        <audio id="audio" src="full_audio_pecos_bill.mp3" preload="auto"></audio>
+      </section>
+      <section class="extras" aria-label="Other ways to enjoy this story"><div class="extras-title">Other ways to enjoy this story</div><div class="action-row">
+        <button class="action hifi-action" id="share" title="Read with a friend" aria-label="Read with a friend" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.5 3.5l-2 16c-.1.7-.8 1.1-1.5.8l-5.9-2.4-3.1 3.2c-.3.3-.8.4-1.2.2-.4-.2-.6-.6-.6-1v-4.1l9-8.8-11 7c-.5.3-1.2.1-1.5-.4L1.2 9.7c-.3-.5-.1-1.2.5-1.4l18.2-5.9c.8-.3 1.6.4 1.5 1.1z" /></svg></button>
+        <a class="action hifi-action" href="https://youtu.be/sTGOspAuJjo" title="Watch on YouTube" aria-label="Watch on YouTube" target="_blank" rel="noopener noreferrer"><img src="../../assets/icons/youtube.svg" alt="" /></a>
+        <a class="action hifi-action" href="https://open.spotify.com/episode/3rwqNTwnOP5VybTfIYIHjf?si=00HuAW0NRDGOprLa31a7qA" title="Listen on Spotify" aria-label="Listen on Spotify" target="_blank" rel="noopener noreferrer"><img src="../../assets/icons/podcast.svg" alt="" /></a>
+        <a class="action hifi-action disabled" href="#" title="Amazon link unavailable for this title" aria-label="Amazon link unavailable for this title" aria-disabled="true"><img src="../../assets/icons/purchase.svg" alt="" /></a>
+      </div></section>
+    </main>
+    <script>
+      const pages = Array.from({ length: 26 }, (_, i) => `jpg/Scan ${i + 1}.jpg`); const audio = document.getElementById('audio'); const progress = document.getElementById('progress'); const readout = document.getElementById('time-readout'); const play = document.getElementById('play'); const left = document.getElementById('page-left'); const right = document.getElementById('page-right'); let index = 0;
+      function render() { if (index === pages.length) { left.src = 'jpg/back_cover.jpg'; left.alt = 'Back cover'; right.removeAttribute('src'); right.alt = 'Blank page'; right.style.opacity = '0'; return; } left.src = encodeURI(pages[index]); left.alt = `Story page ${index + 1}`; right.src = encodeURI(pages[index + 1] || ''); right.alt = `Story page ${index + 2}`; right.style.opacity = '1'; }
+      function turn(step) { if (step < 0) index = index === 0 ? pages.length : index - 2; else index = index >= pages.length - 2 ? 0 : index + 2; render(); } function time(s) { if (!Number.isFinite(s)) return '0:00'; return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`; } function update() { readout.textContent = `${time(audio.currentTime)} / ${time(audio.duration)}`; if (audio.duration) progress.max = audio.duration; }
+      play.addEventListener('click', () => audio.paused ? audio.play() : audio.pause()); audio.addEventListener('play', () => { play.innerHTML = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>'; }); audio.addEventListener('pause', () => { play.innerHTML = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>'; }); audio.addEventListener('timeupdate', () => { progress.value = audio.currentTime; update(); }); audio.addEventListener('loadedmetadata', update); progress.addEventListener('input', () => { audio.currentTime = progress.value; update(); }); document.getElementById('prev').addEventListener('click', () => turn(-2)); document.getElementById('next').addEventListener('click', () => turn(2)); document.getElementById('share').addEventListener('click', () => navigator.clipboard?.writeText(location.href)); render(); update();
+    </script>
+  </body>
+</html>
