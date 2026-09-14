@@ -131,13 +131,34 @@
               <path fill="currentColor" d="M21.5 3.5l-2 16c-.1.7-.8 1.1-1.5.8l-5.9-2.4-3.1 3.2c-.3.3-.8.4-1.2.2-.4-.2-.6-.6-.6-1v-4.1l9-8.8-11 7c-.5.3-1.2.1-1.5-.4L1.2 9.7c-.3-.5-.1-1.2.5-1.4l18.2-5.9c.8-.3 1.6.4 1.5 1.1z" />
             </svg>
           </button>
-          <a class="action hifi-action disabled" href="#" title="YouTube link coming soon" aria-label="YouTube link coming soon" aria-disabled="true">
+          <a
+            class="action hifi-action"
+            href="https://youtu.be/X7pCOpiqeYc"
+            title="Watch on YouTube"
+            aria-label="Watch on YouTube"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="../../assets/icons/youtube.svg" alt="" aria-hidden="true" />
           </a>
-          <a class="action hifi-action disabled" href="#" title="Podcast link coming soon" aria-label="Podcast link coming soon" aria-disabled="true">
+          <a
+            class="action hifi-action"
+            href="https://open.spotify.com/episode/60ZFRYpR3DdApi2XxDvzQJ?si=7VKgPmkOSDWyVTuF03PdfQ"
+            title="Listen on Spotify"
+            aria-label="Listen on Spotify"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="../../assets/icons/podcast.svg" alt="" aria-hidden="true" />
           </a>
-          <a class="action hifi-action disabled" href="#" title="Amazon link (for originals later)" aria-label="Amazon link (for originals later)" aria-disabled="true">
+          <a
+            class="action hifi-action"
+            href="https://www.amazon.com/dp/B0HJPCMCXZ?spcref=PRINT_LISTING"
+            title="Purchase on Amazon"
+            aria-label="Purchase on Amazon"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="../../assets/icons/purchase.svg" alt="" aria-hidden="true" />
           </a>
         </div>
@@ -145,22 +166,23 @@
     </main>
 
     <script>
-      const totalSpreads = 14;
+      const totalSpreads = 15;
       const pages = [
-        ["jpg/this_book_belongs_to.jpg", "jpg/title_page.jpg"],
-        ["jpg/page_01.jpg", "jpg/page_02.jpg"],
-        ["jpg/page_03.jpg", "jpg/page_04.jpg"],
-        ["jpg/page_05.jpg", "jpg/page_06.jpg"],
-        ["jpg/page_07.jpg", "jpg/page_08.jpg"],
-        ["jpg/page_09.jpg", "jpg/page_10.jpg"],
-        ["jpg/page_11.jpg", "jpg/page_12.jpg"],
-        ["jpg/page_13.jpg", "jpg/page_14.jpg"],
-        ["jpg/page_15.jpg", "jpg/page_16.jpg"],
-        ["jpg/page_17.jpg", "jpg/page_18.jpg"],
-        ["jpg/page_19.jpg", "jpg/page_20.jpg"],
-        ["jpg/page_21.jpg", "jpg/page_22.jpg"],
-        ["jpg/page_23.jpg", "jpg/page_24.jpg"],
-        ["jpg/record_sleeve.jpg", "jpg/meet_the_authors.jpg"],
+        [null, "jpg/this_book_belongs_to.jpg"],
+        ["jpg/title_page.jpg", "jpg/page_01.jpg"],
+        ["jpg/page_02.jpg", "jpg/page_03.jpg"],
+        ["jpg/page_04.jpg", "jpg/page_05.jpg"],
+        ["jpg/page_06.jpg", "jpg/page_07.jpg"],
+        ["jpg/page_08.jpg", "jpg/page_09.jpg"],
+        ["jpg/page_10.jpg", "jpg/page_11.jpg"],
+        ["jpg/page_12.jpg", "jpg/page_13.jpg"],
+        ["jpg/page_14.jpg", "jpg/page_15.jpg"],
+        ["jpg/page_16.jpg", "jpg/page_17.jpg"],
+        ["jpg/page_18.jpg", "jpg/page_19.jpg"],
+        ["jpg/page_20.jpg", "jpg/page_21.jpg"],
+        ["jpg/page_22.jpg", "jpg/page_23.jpg"],
+        ["jpg/page_24.jpg", "jpg/record_sleeve.jpg"],
+        ["jpg/meet_the_authors.jpg", null],
       ];
       // Keep this true by default so the final turn shows:
       // back cover on the left + blank page on the right.
@@ -194,9 +216,13 @@
         }
 
         const [leftPage, rightPage] = current;
+        const pageMarkup = (src, alt) =>
+          src
+            ? `<img src="${encodeURI(src)}" alt="${alt}" />`
+            : '<div class="page-blank" aria-hidden="true"></div>';
         spreadView.innerHTML = `
-          <img src="${encodeURI(leftPage)}" alt="Story spread ${index + 1}, left page" />
-          <img src="${encodeURI(rightPage)}" alt="Story spread ${index + 1}, right page" />
+          ${pageMarkup(leftPage, `Story spread ${index + 1}, left page`)}
+          ${pageMarkup(rightPage, `Story spread ${index + 1}, right page`)}
         `;
       }
 
